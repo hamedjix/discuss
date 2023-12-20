@@ -1,5 +1,7 @@
 import TopicCreateForm from "@/components/topics/TopicCreateForm";
 import { db } from "@/db";
+import paths from "@/paths";
+import Link from "next/link";
 
 export default async function Home() {
   const topics = await db.topic.findMany();
@@ -15,7 +17,9 @@ export default async function Home() {
         <div className="border p-4 rounded space-y-4">
           {topics.map((topic) => (
             <div key={topic.id}>
-              <h4 className="font-bold">{topic.slug}</h4>
+              <Link href={paths.topicShow(topic.slug)} className="font-bold">
+                {topic.slug}
+              </Link>
               <p className="text-gray-600 text-sm">{topic.description}</p>
             </div>
           ))}
