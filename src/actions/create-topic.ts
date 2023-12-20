@@ -23,6 +23,8 @@ const topicValidationSchema = z.object({
   description: z.string().min(10),
 });
 export async function createTopic(formState: ICreateTopicFormState, formData: FormData): Promise<ICreateTopicFormState> {
+  await new Promise((res) => setTimeout(res, 2000));
+
   const result = topicValidationSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description"),
